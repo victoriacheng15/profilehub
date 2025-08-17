@@ -4,6 +4,8 @@ import (
     "fmt"
     "os"
     "log"
+    "net/http"
+    "html/template"
 
     "gopkg.in/yaml.v3"
 )
@@ -66,20 +68,17 @@ func loadThemes(path string) (map[string]map[string]string, error) {
 }
 
 func main() {
-    configPath := "src/config/config.yml"
-    config, err := loadConfig(configPath)
+    config, err := loadConfig("src/config/config.yml")
     if err != nil {
         log.Fatalf("Error reading config.yml: %v", err)
     }
 
-    fmt.Println("Config:")
     themeName, ok := config["theme"].(string)
     if !ok {
         log.Fatalf("Theme not found or not a string in config.yml")
     }
 
-    themesPath := "src/themes/themes.yml"
-    themes, err := loadThemes(themesPath)
+    themes, err := loadThemes("src/themes/themes.yml")
     if err != nil {
         log.Fatalf("Error reading themes.yml: %v", err)
     }
@@ -88,13 +87,18 @@ func main() {
     if !ok {
         log.Fatalf("Theme '%s' not found in themes.yml", themeName)
     }
-
-    // Print config, but for 'theme' key, print theme colors as nested map
-    for key, value := range config {
-        if key == "theme" {
-            printYAML(key, themeColors, 1)
-        } else {
-            printYAML(key, value, 1)
+    
+    config["theme"] = themeColors
+    
+    tmpl := template.Must(template.ParseFiles("src/templates/index.html"))
+    
+    http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+        err := tmpl.Execute(w, config)
+        if err != nil {
+            http.Error(w, err.Error(), http.StatusInternalServerError)
         }
-    }
+    })
+    
+    fmt.Println("Server running at http://localhost:8080")
+    log.Fatal(http.ListenAndServe(":8080", nil))
 }
