@@ -1,0 +1,21 @@
+theme: blue
+
+avatar: "images/avatar.jpg"
+name: "Your Name"
+headline: "Your Awesome Headline"
+
+social:
+  - icon: "fab fa-github"
+    url: "https://github.com/yourname"
+  - icon: "fab fa-linkedin"
+    url: "https://linkedin.com/in/yourname"
+  - icon: "fab fa-twitter"
+    url: "https://twitter.com/yourhandle"
+
+links:
+  - name: "Blog"
+    url: "https://yourblog.com"
+  - name: "Portfolio"
+    url: "https://yourportfolio.com"
+  - name: "Project"
+    url: "https://projectsite.com"
