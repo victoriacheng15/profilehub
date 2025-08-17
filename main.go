@@ -2,7 +2,7 @@ package main
 
 import (
     "fmt"
-    "io/ioutil"
+    "os"
     "log"
 
     "gopkg.in/yaml.v3"
@@ -31,8 +31,8 @@ func printYAML(key string, value interface{}, indent int) {
 }
 
 func main() {
-    configFile := "src/config/config.yml"
-    data, err := ioutil.ReadFile(configFile)
+    configPath := "src/config/config.yml"
+    data, err := os.ReadFile(configPath)
     if err != nil {
         log.Fatalf("Error reading config.yml: %v", err)
     }
