@@ -88,7 +88,7 @@ func main() {
         log.Fatalf("Theme '%s' not found in themes.yml", themeName)
     }
     
-    config["theme"] = themeColors // include theme colors in config
+    config["theme"] = themeColors
     
     tmpl := template.Must(template.ParseFiles("src/templates/index.html"))
     
