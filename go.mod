@@ -1,4 +1,4 @@
-module github.com/victoriacheng15hub/profilehub
+module github.com/victoriacheng15/profilehub
 
 go 1.22.2
 
