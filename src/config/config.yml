@@ -1,15 +1,15 @@
 theme: blue
 
-avatar: "images/avatar.jpg"
+avatar: "https://placehold.co/300x300"
 name: "Your Name"
 headline: "Your Awesome Headline"
 
 social:
-  - icon: "fab fa-github"
+  - icon: "fab fa-github fa-lg"
     url: "https://github.com/yourname"
-  - icon: "fab fa-linkedin"
+  - icon: "fab fa-linkedin fa-lg"
     url: "https://linkedin.com/in/yourname"
-  - icon: "fab fa-twitter"
+  - icon: "fab fa-twitter fa-lg"
     url: "https://twitter.com/yourhandle"
 
 links:

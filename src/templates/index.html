@@ -6,10 +6,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ProfileHub</title>
   <meta name="description" content="ProfileHub - Personal profile site">
+  <link rel="stylesheet" type="text/css" href="static/css/all.min.css">
+  <link rel="stylesheet" type="text/css" href="static/css/styles.css">
 </head>
 
 <body>
-  <h1>{{.name}}</h1>
+  <header>
+    <img src="{{.avatar}}" alt="{{.name}}'s avatar" />
+    <h1>{{.name}}</h1>
+    <p>{{.headline}}</p>
+    <div>
+      <ul class="social-links">
+        {{range .social}}
+        <a href=" {{.url}}" target="_blank" rel="noopener">
+          <i class="{{.icon}}" aria-hidden="true"></i>
+        </a>
+        {{end}}
+      </ul>
+    </div>
+  </header>
+  <main>
+    <ul class="links">
+      {{range .links}}
+      <li>
+        <a href="{{.url}}" target="_blank" rel="noopener">{{.name}}</a>
+      </li>
+      {{end}}
+    </ul>
+  </main>
+  <footer>
+    <p>&copy; {{.year}} {{.name}}. All rights reserved.</p>
+  </footer>
 </body>
 
 </html>

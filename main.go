@@ -91,6 +91,8 @@ func main() {
 
 	tmpl := template.Must(template.ParseFiles("src/templates/index.html"))
 
+	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("src/static"))))
+
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		err := tmpl.Execute(w, config)
 		if err != nil {
