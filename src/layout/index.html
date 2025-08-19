@@ -31,24 +31,10 @@
       <img src="{{.avatar}}" alt="{{.name}}'s avatar" />
       <h1 class="font-2">{{.name}}</h1>
       <p class="font-1-5">{{.headline}}</p>
-      <ul class="social-links flex flex-gap">
-        {{range .social}}
-        <li>
-          <a class="btn flex radius-6" href="{{.url}}" target="_blank" rel="noopener">
-            <i class="{{.icon}} fa-3x" aria-hidden="true"></i>
-          </a>
-        </li>
-        {{end}}
-      </ul>
+      {{template "social.html" .social}}
     </header>
     <main>
-      <ul class="links flex flex-col flex-gap">
-        {{range .links}}
-        <li>
-          <a class="btn radius-6 font-1-5" href="{{.url}}" target="_blank" rel="noopener">{{.name}}</a>
-        </li>
-        {{end}}
-      </ul>
+      {{template "links.html" .links}}
     </main>
     <footer>
       <p>&copy; {{.name}}. All rights reserved.</p>

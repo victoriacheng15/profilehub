@@ -89,7 +89,7 @@ func main() {
 
 	config["theme"] = themeColors
 
-	tmpl := template.Must(template.ParseFiles("src/templates/index.html"))
+	tmpl := template.Must(template.ParseGlob("src/layout/*.html"))
 
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("src/static"))))
 
