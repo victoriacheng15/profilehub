@@ -1,0 +1,27 @@
+Params:
+  Avatar: "https://placehold.co/300x300"
+  Name: "Your Name"
+  Headline: "Your Awesome Headline"
+
+  Theme:
+    Background: "#154D71"
+    Text: "#FFF9AF"
+    Button: "#FFF9AF"
+    ButtonText: "#175A87"
+    ButtonHover: "#FFF57C"
+
+  Socials:
+    - Icon: "fab fa-github"
+      URL: "https://github.com/yourname"
+    - Icon: "fab fa-linkedin"
+      URL: "https://linkedin.com/in/yourname"
+    - Icon: "fab fa-twitter"
+      URL: "https://twitter.com/yourhandle"
+
+  Links:
+    - Name: "Blog"
+      URL: "https://yourblog.com"
+    - Name: "Portfolio"
+      URL: "https://yourportfolio.com"
+    - Name: "Project"
+      URL: "https://projectsite.com"
