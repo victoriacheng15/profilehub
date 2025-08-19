@@ -1,0 +1,9 @@
+<ul class="social-links flex flex-gap">
+  {{range .}}
+  <li>
+    <a class="btn flex radius-6" href="{{.url}}" target="_blank" rel="noopener">
+      <i class="{{.icon}} fa-3x" aria-hidden="true"></i>
+    </a>
+  </li>
+  {{end}}
+</ul>
