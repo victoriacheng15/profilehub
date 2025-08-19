@@ -57,7 +57,7 @@ func loadConfig(path string) (Config, error) {
 }
 
 func main() {
-	config, err := loadConfig("src/config/config.yml")
+	config, err := loadConfig("config/config.yml")
 	if err != nil {
 		log.Fatalf("Error reading config.yml: %v", err)
 	}
