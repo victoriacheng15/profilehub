@@ -4,39 +4,56 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ProfileHub</title>
-  <meta name="description" content="ProfileHub - Personal profile site">
+  <title>ProfileHub - {{.name}}</title>
+  <meta name="description" content="ProfileHub - {{.name}}">
   <link rel="stylesheet" type="text/css" href="static/css/all.min.css">
   <link rel="stylesheet" type="text/css" href="static/css/styles.css">
+  <style>
+    body {
+      background: {{.theme.background}};
+      color: {{.theme.text}};
+    }
+
+    .btn {
+      background: {{.theme.button}};
+      color: {{.theme.buttonText}};
+    }
+
+    .btn:hover {
+      background: {{.theme.buttonHover}};
+    }
+  </style>
 </head>
 
 <body>
-  <header>
-    <img src="{{.avatar}}" alt="{{.name}}'s avatar" />
-    <h1>{{.name}}</h1>
-    <p>{{.headline}}</p>
-    <div>
-      <ul class="social-links">
+  <div id="app">
+    <header class="flex flex-col flex-gap">
+      <img src="{{.avatar}}" alt="{{.name}}'s avatar" />
+      <h1 class="font-2">{{.name}}</h1>
+      <p class="font-1-5">{{.headline}}</p>
+      <ul class="social-links flex flex-gap">
         {{range .social}}
-        <a href=" {{.url}}" target="_blank" rel="noopener">
-          <i class="{{.icon}}" aria-hidden="true"></i>
-        </a>
+        <li>
+          <a class="btn flex radius-6" href="{{.url}}" target="_blank" rel="noopener">
+            <i class="{{.icon}} fa-3x" aria-hidden="true"></i>
+          </a>
+        </li>
         {{end}}
       </ul>
-    </div>
-  </header>
-  <main>
-    <ul class="links">
-      {{range .links}}
-      <li>
-        <a href="{{.url}}" target="_blank" rel="noopener">{{.name}}</a>
-      </li>
-      {{end}}
-    </ul>
-  </main>
-  <footer>
-    <p>&copy; {{.year}} {{.name}}. All rights reserved.</p>
-  </footer>
+    </header>
+    <main>
+      <ul class="links flex flex-col flex-gap">
+        {{range .links}}
+        <li>
+          <a class="btn radius-6 font-1-5" href="{{.url}}" target="_blank" rel="noopener">{{.name}}</a>
+        </li>
+        {{end}}
+      </ul>
+    </main>
+    <footer>
+      <p>&copy; {{.name}}. All rights reserved.</p>
+    </footer>
+  </div>
 </body>
 
 </html>
