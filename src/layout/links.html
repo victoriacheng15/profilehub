@@ -1,7 +1,9 @@
+{{define "links.html"}}
 <ul class="links flex flex-col flex-gap">
   {{range .}}
   <li>
-    <a class="btn radius-6 font-1-5" href="{{.url}}" target="_blank" rel="noopener">{{.name}}</a>
+    <a class="btn radius-6 font-1-5" href="{{.URL}}" target="_blank" rel="noopener">{{.Name}}</a>
   </li>
   {{end}}
 </ul>
+{{end}}

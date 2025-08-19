@@ -10,60 +10,50 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-func printYAML(key string, value interface{}, indent int) {
-	pad := ""
-	for i := 0; i < indent; i++ {
-		pad += "  "
-	}
-	switch v := value.(type) {
-	case map[string]interface{}:
-		fmt.Printf("%s%v:\n", pad, key)
-		for k, val := range v {
-			printYAML(k, val, indent+1)
-		}
-	case map[string]string:
-		fmt.Printf("%s%v:\n", pad, key)
-		for k, val := range v {
-			fmt.Printf("%s  %s: %s\n", pad, k, val)
-		}
-	case []interface{}:
-		fmt.Printf("%s%v:\n", pad, key)
-		for i, item := range v {
-			printYAML(fmt.Sprintf("[%d]", i), item, indent+1)
-		}
-	default:
-		fmt.Printf("%s%v: %v\n", pad, key, v)
-	}
+type Theme struct {
+	Background  string `yaml:"Background"`
+	Text        string `yaml:"Text"`
+	Button      string `yaml:"Button"`
+	ButtonText  string `yaml:"ButtonText"`
+	ButtonHover string `yaml:"ButtonHover"`
 }
 
-func loadConfig(path string) (map[string]interface{}, error) {
+type Social struct {
+	Icon string `yaml:"Icon"`
+	URL  string `yaml:"URL"`
+}
+
+type Link struct {
+	Name string `yaml:"Name"`
+	URL  string `yaml:"URL"`
+}
+
+type Params struct {
+	Avatar   string   `yaml:"Avatar"`
+	Name     string   `yaml:"Name"`
+	Headline string   `yaml:"Headline"`
+	Theme    Theme    `yaml:"Theme"`
+	Socials  []Social `yaml:"Socials"`
+	Links    []Link   `yaml:"Links"`
+}
+
+type Config struct {
+	Params Params `yaml:"Params"`
+}
+
+func loadConfig(path string) (Config, error) {
 	data, err := os.ReadFile(path)
 	if err != nil {
-		return nil, fmt.Errorf("error reading config file: %w", err)
+		return Config{}, fmt.Errorf("error reading config file: %w", err)
 	}
 
-	var config map[string]interface{}
+	var config Config
 	err = yaml.Unmarshal(data, &config)
 	if err != nil {
-		return nil, fmt.Errorf("error parsing config file: %w", err)
+		return Config{}, fmt.Errorf("error parsing config file: %w", err)
 	}
 
 	return config, nil
-}
-
-func loadThemes(path string) (map[string]map[string]string, error) {
-	data, err := os.ReadFile(path)
-	if err != nil {
-		return nil, fmt.Errorf("error reading themes file: %w", err)
-	}
-
-	var themes map[string]map[string]string
-	err = yaml.Unmarshal(data, &themes)
-	if err != nil {
-		return nil, fmt.Errorf("error parsing themes file: %w", err)
-	}
-
-	return themes, nil
 }
 
 func main() {
@@ -71,23 +61,6 @@ func main() {
 	if err != nil {
 		log.Fatalf("Error reading config.yml: %v", err)
 	}
-
-	themeName, ok := config["theme"].(string)
-	if !ok {
-		log.Fatalf("Theme not found or not a string in config.yml")
-	}
-
-	themes, err := loadThemes("src/themes/themes.yml")
-	if err != nil {
-		log.Fatalf("Error reading themes.yml: %v", err)
-	}
-
-	themeColors, ok := themes[themeName]
-	if !ok {
-		log.Fatalf("Theme '%s' not found in themes.yml", themeName)
-	}
-
-	config["theme"] = themeColors
 
 	tmpl := template.Must(template.ParseGlob("src/layout/*.html"))
 

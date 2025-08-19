@@ -4,23 +4,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ProfileHub - {{.name}}</title>
-  <meta name="description" content="ProfileHub - {{.name}}">
+  <title>ProfileHub - {{.Params.Name}}</title>
+  <meta name="description" content="ProfileHub - {{.Params.Name}}">
   <link rel="stylesheet" type="text/css" href="static/css/all.min.css">
   <link rel="stylesheet" type="text/css" href="static/css/styles.css">
   <style>
     body {
-      background: {{.theme.background}};
-      color: {{.theme.text}};
+      background: {{.Params.Theme.Background}};
+      color: {{.Params.Theme.Text}};
     }
 
     .btn {
-      background: {{.theme.button}};
-      color: {{.theme.buttonText}};
+      background: {{.Params.Theme.Button}};
+      color: {{.Params.Theme.ButtonText}};
     }
 
     .btn:hover {
-      background: {{.theme.buttonHover}};
+      background: {{.Params.Theme.ButtonHover}};
     }
   </style>
 </head>
@@ -28,16 +28,16 @@
 <body>
   <div id="app">
     <header class="flex flex-col flex-gap">
-      <img src="{{.avatar}}" alt="{{.name}}'s avatar" />
-      <h1 class="font-2">{{.name}}</h1>
-      <p class="font-1-5">{{.headline}}</p>
-      {{template "social.html" .social}}
+      <img src="{{.Params.Avatar}}" alt="{{.Params.Name}}'s avatar" />
+      <h1 class="font-2">{{.Params.Name}}</h1>
+      <p class="font-1-5">{{.Params.Headline}}</p>
+      {{template "socials.html" .Params.Socials}}
     </header>
     <main>
-      {{template "links.html" .links}}
+      {{template "links.html" .Params.Links}}
     </main>
     <footer>
-      <p>&copy; {{.name}}. All rights reserved.</p>
+      <p>&copy; {{.Params.Name}}. All rights reserved.</p>
     </footer>
   </div>
 </body>
