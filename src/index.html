@@ -31,10 +31,10 @@
       <img src="{{.Params.Avatar}}" alt="{{.Params.Name}}'s avatar" />
       <h1 class="font-2">{{.Params.Name}}</h1>
       <p class="font-1-5">{{.Params.Headline}}</p>
-      {{template "socials.html" .Params.Socials}}
+      {{template "layout/socials.html" .Params.Socials}}
     </header>
     <main>
-      {{template "links.html" .Params.Links}}
+      {{template "layout/links.html" .Params.Links}}
     </main>
     <footer>
       <p>&copy; {{.Params.Name}}. All rights reserved.</p>

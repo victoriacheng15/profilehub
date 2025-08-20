@@ -69,7 +69,8 @@ var devCmd = &cobra.Command{
 			log.Fatalf("Error reading config.yml: %v", err)
 		}
 
-		tmpl := template.Must(template.ParseGlob("src/layout/*.html"))
+		tmpl := template.Must(template.ParseFiles("src/index.html"))
+		tmpl = template.Must(tmpl.ParseGlob("src/layout/*.html"))
 
 		http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("src/static"))))
 
