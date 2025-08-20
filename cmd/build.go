@@ -6,11 +6,11 @@ package cmd
 import (
 	"fmt"
 	"github.com/spf13/cobra"
+	"gopkg.in/yaml.v3"
 	"html/template"
 	"io"
 	"os"
 	"path/filepath"
-	"gopkg.in/yaml.v3"
 )
 
 func copyDir(src string, dst string) error {
@@ -49,15 +49,8 @@ var buildCmd = &cobra.Command{
 	Use:   "build",
 	Short: "Build the ProfileHub static files",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("Building dist folder...")
-		os.MkdirAll("dist/static", 0755)
-		os.MkdirAll("dist/webfonts", 0755)
 		if err := os.MkdirAll("dist/static", 0755); err != nil {
 			fmt.Println("Error creating dist/static:", err)
-			return
-		}
-		if err := os.MkdirAll("dist/webfonts", 0755); err != nil {
-			fmt.Println("Error creating dist/webfonts:", err)
 			return
 		}
 		// Render index.html as Go template
@@ -106,21 +99,10 @@ var buildCmd = &cobra.Command{
 			fmt.Println("Error rendering template:", err)
 			return
 		}
-
-		// Copy layout (templates)
-		err = copyDir("src/layout", "dist/layout")
-		if err != nil {
-			fmt.Println("Error copying layout files:", err)
-		}
 		// Copy static assets
 		err = copyDir("src/static", "dist/static")
 		if err != nil {
 			fmt.Println("Error copying static files:", err)
-		}
-		// Copy webfonts
-		err = copyDir("src/static/webfonts", "dist/webfonts")
-		if err != nil {
-			fmt.Println("Error copying webfonts:", err)
 		}
 		fmt.Println("Build complete. Files are in dist/")
 	},
