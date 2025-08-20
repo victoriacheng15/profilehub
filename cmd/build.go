@@ -52,7 +52,14 @@ var buildCmd = &cobra.Command{
 		fmt.Println("Building dist folder...")
 		os.MkdirAll("dist/static", 0755)
 		os.MkdirAll("dist/webfonts", 0755)
-
+		if err := os.MkdirAll("dist/static", 0755); err != nil {
+			fmt.Println("Error creating dist/static:", err)
+			return
+		}
+		if err := os.MkdirAll("dist/webfonts", 0755); err != nil {
+			fmt.Println("Error creating dist/webfonts:", err)
+			return
+		}
 		// Render index.html as Go template
 		// Load config.yml
 		configPath := "config/config.yml"
