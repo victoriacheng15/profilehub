@@ -105,7 +105,6 @@ var buildCmd = &cobra.Command{
 		if err != nil {
 			fmt.Println("Error copying layout files:", err)
 		}
-
 		// Copy static assets
 		err = copyDir("src/static", "dist/static")
 		if err != nil {
