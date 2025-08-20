@@ -116,7 +116,6 @@ var buildCmd = &cobra.Command{
 		if err != nil {
 			fmt.Println("Error copying webfonts:", err)
 		}
-
 		fmt.Println("Build complete. Files are in dist/")
 	},
 }
