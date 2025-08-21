@@ -19,12 +19,12 @@ var initCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		projectName := args[0]
 		template, _ := cmd.Flags().GetString("template")
-		
+
 		// Default to "default" template if not specified
 		if template == "" {
 			template = "default"
 		}
-		
+
 		// Validate template dynamically against embedded templates
 		if _, err := templates.FS.ReadDir(template); err != nil {
 			fmt.Printf("❌ Unknown template: %s\n", template)
@@ -39,22 +39,22 @@ var initCmd = &cobra.Command{
 			}
 			return
 		}
-		
+
 		fmt.Printf("Creating new ProfileHub project: %s\n", projectName)
 		fmt.Printf("Using template: %s\n", template)
-		
+
 		// Create project directory
 		if err := os.MkdirAll(projectName, 0755); err != nil {
 			fmt.Printf("Error creating project directory: %v\n", err)
 			return
 		}
-		
+
 		// Extract embedded files
 		if err := extractTemplate(projectName, template); err != nil {
 			fmt.Printf("Error extracting template files: %v\n", err)
 			return
 		}
-		
+
 		fmt.Printf("✅ Project '%s' created successfully!\n", projectName)
 		fmt.Printf("\nNext steps:\n")
 		fmt.Printf("  cd %s\n", projectName)
@@ -80,11 +80,11 @@ func extractDir(embedPath, destPath string) error {
 	if err != nil {
 		return err
 	}
-	
+
 	for _, entry := range entries {
 		srcPath := filepath.Join(embedPath, entry.Name())
 		dstPath := filepath.Join(destPath, entry.Name())
-		
+
 		if entry.IsDir() {
 			if err := os.MkdirAll(dstPath, 0755); err != nil {
 				return err
@@ -97,17 +97,17 @@ func extractDir(embedPath, destPath string) error {
 			if err != nil {
 				return err
 			}
-			
+
 			if err := os.MkdirAll(filepath.Dir(dstPath), 0755); err != nil {
 				return err
 			}
-			
+
 			if err := os.WriteFile(dstPath, content, 0644); err != nil {
 				return err
 			}
 		}
 	}
-	
+
 	return nil
 }
 
