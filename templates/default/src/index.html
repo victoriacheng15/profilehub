@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ProfileHub - {{.Params.Name}}</title>
   <meta name="description" content="ProfileHub - {{.Params.Name}}">
-  <link rel="stylesheet" type="text/css" href="static/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" type="text/css" href="static/css/styles.css">
   <style>
     body {
@@ -31,10 +31,24 @@
       <img src="{{.Params.Avatar}}" alt="{{.Params.Name}}'s avatar" />
       <h1 class="font-2">{{.Params.Name}}</h1>
       <p class="font-1-5">{{.Params.Headline}}</p>
-      {{template "layout/socials.html" .Params.Socials}}
+      <ul class="social-links flex flex-gap">
+        {{range .Params.Socials}}
+        <li>
+          <a class="btn flex radius-6" href="{{.URL}}" target="_blank" rel="noopener">
+            <i class="{{.Icon}} fa-3x" aria-hidden="true"></i>
+          </a>
+        </li>
+        {{end}}
+      </ul>
     </header>
     <main>
-      {{template "layout/links.html" .Params.Links}}
+      <ul class="links flex flex-col flex-gap">
+        {{range .Params.Links}}
+        <li>
+          <a class="btn radius-6 font-1-5" href="{{.URL}}" target="_blank" rel="noopener">{{.Name}}</a>
+        </li>
+        {{end}}
+      </ul>
     </main>
     <footer>
       <p>&copy; {{.Params.Name}}. All rights reserved.</p>
