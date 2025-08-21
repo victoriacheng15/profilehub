@@ -39,6 +39,18 @@ type Config struct {
 	Params Params `yaml:"Params"`
 }
 
+// LoadConfig reads a YAML configuration file from the given path and unmarshals it into a Config struct.
+// 
+// Parameters:
+//   path - the file path to the YAML configuration file.
+//
+// Returns:
+//   Config - the parsed configuration struct.
+//   error  - an error if the file cannot be read or parsed.
+//
+// Possible errors:
+//   - If the file cannot be read, returns an error wrapping the underlying I/O error.
+//   - If the file cannot be parsed as YAML, returns an error wrapping the underlying parsing error.
 func LoadConfig(path string) (Config, error) {
 	data, err := os.ReadFile(path)
 	if err != nil {
