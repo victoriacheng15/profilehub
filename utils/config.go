@@ -40,13 +40,15 @@ type Config struct {
 }
 
 // LoadConfig reads a YAML configuration file from the given path and unmarshals it into a Config struct.
-// 
+//
 // Parameters:
-//   path - the file path to the YAML configuration file.
+//
+//	path - the file path to the YAML configuration file.
 //
 // Returns:
-//   Config - the parsed configuration struct.
-//   error  - an error if the file cannot be read or parsed.
+//
+//	Config - the parsed configuration struct.
+//	error  - an error if the file cannot be read or parsed.
 //
 // Possible errors:
 //   - If the file cannot be read, returns an error wrapping the underlying I/O error.
@@ -71,11 +73,13 @@ func LoadConfig(path string) (Config, error) {
 // their structure and file modes. If an error occurs during copying, it returns a non-nil error.
 //
 // Parameters:
-//   src: the source directory to copy from.
-//   dst: the destination directory to copy to.
+//
+//	src: the source directory to copy from.
+//	dst: the destination directory to copy to.
 //
 // Returns:
-//   error: nil if successful, or an error describing the failure.
+//
+//	error: nil if successful, or an error describing the failure.
 func CopyDir(src string, dst string) error {
 	return filepath.Walk(src, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
