@@ -66,7 +66,16 @@ func LoadConfig(path string) (Config, error) {
 	return config, nil
 }
 
-// CopyDir recursively copies a directory from src to dst, skipping .gitkeep files
+// CopyDir recursively copies the contents of the directory at src to the directory at dst.
+// It skips any files named ".gitkeep". All subdirectories and files are copied, preserving
+// their structure and file modes. If an error occurs during copying, it returns a non-nil error.
+//
+// Parameters:
+//   src: the source directory to copy from.
+//   dst: the destination directory to copy to.
+//
+// Returns:
+//   error: nil if successful, or an error describing the failure.
 func CopyDir(src string, dst string) error {
 	return filepath.Walk(src, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
